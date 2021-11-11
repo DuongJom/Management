@@ -7,7 +7,8 @@ struct Account{
 	int ID;
 	char userName[31];
 	char passWord[31];
-}; 
+};
+ 
 struct User{
 	int ID;
 	char name[31];
