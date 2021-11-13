@@ -59,7 +59,7 @@ int checkExist(int accountID){
 void updAcc(int choice){
     int id;
     re_enter:
-    printf("Enter account number want to update: ");
+    printf("Nhap so tai khoan can cap nhat thong tin: ");
     scanf("%d",&id);
     fflush(stdin);
     if(checkExist(id)==1){
@@ -69,12 +69,12 @@ void updAcc(int choice){
                 //choice==1: update address's customer
                 //choice==2: update phone's customer
                 if(choice==1){
-                    printf("Enter new address: ");
+                    printf("Nhap dia chi moi: ");
                     char newAddress[31];
                     gets(newAddress);
                     strcpy(acc[i].address,newAddress);
                 }else if(choice==2){
-                    printf("Enter new phone: ");
+                    printf("Nhap so dien thoai moi: ");
                     char newPhone[11];
                     gets(newPhone);
                     strcpy(acc[i].phone,newPhone);
@@ -86,8 +86,8 @@ void updAcc(int choice){
         }
     }
     else{
-        printf("Account has already not exist!!\n");
-        printf("Do you want to continue?(Y/n)\n>> ");
+        printf("Tai khoan khong ton tai!!\n");
+        printf("Ban co muon nhap lai?(Y/n)\n>> ");
         char c;
         scanf("%c",&c);
         if(c=='Y'||c=='y'){
@@ -212,7 +212,7 @@ int readFile()
 {
 	FILE* f = fopen(file,"rb");
 	if(f==NULL){
-		printf("Can't read file!!");
+		printf("Khong the doc file!!");
 		return 0;
 	}
 	fread(&n,sizeof(n),1,f);
