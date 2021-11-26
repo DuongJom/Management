@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1636809215 source:d:\github\management\accountbankingmanagement\bank.c
+1637936757 source:d:\github\management\accountbankingmanagement\bank.c
 	<stdio.h>
 	<stdlib.h>
 	"Lib.h"
 
-1636809190 d:\github\management\accountbankingmanagement\lib.h
+1637936247 d:\github\management\accountbankingmanagement\lib.h
 

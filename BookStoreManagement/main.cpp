@@ -1,5 +1,7 @@
 #include <iostream>
 #include<string.h>
+#include<stdlib.h>
+#include<time.h>
 #define MAX 100
 using namespace std;
 
@@ -49,6 +51,16 @@ void registerAccount(Account &account, int id=0){
 	cin>>account.passWord;
 }
 
+void showListAccount(){
+	printf("\n+++++++++++++++++++LIST OF ACCOUNT+++++++++++++++\n");
+	printf("|%-5s|%-20s|%-20s|\n","ID","Username","Password");
+	printf("+++++++++++++++++++++++++++++++++++++++++++++++++\n");
+	for(int i=0;i<nAccounts;i++){
+		printf("|%5d|%-20s|%-20s|\n",accounts[i].ID,accounts[i].userName,accounts[i].passWord);
+	}
+	printf("+++++++++++++++++++++++++++++++++++++++++++++++++\n");
+}
+
 bool loginSystem(char username[], char password[]){
 	for(int i=0;i<nAccounts;i++){
 		if(strcmp(accounts[i].userName,username)==0){
@@ -89,8 +101,8 @@ void registerUser(User &user){
 	cin>>user.phone;
 	
 	re_enter:
-	cout<<"\tEnter account ID: ";
-	cin>>user.account_ID;
+	srand((int)time(0));
+	user.account_ID = rand()%100+1;
 	
 	if(checkAccountIDExist(user.account_ID)==false){
 		Account account;
@@ -103,6 +115,16 @@ void registerUser(User &user){
 	}
 	insertUser(user);
 	cin.ignore();
+}
+
+void showListOfUsers(){
+	printf("++++++++++++++++++LIST OF USERS++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+	printf("|%-5s|%-20s|%-25s|%-15s|%-5s|\n","ID","Name","Address","Phone","Account ID");
+	printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+	for(int i=0;i<nUsers;i++){
+		printf("|%5d|%20s|%25s|%15s|%5d     |\n",users[i].ID,users[i].name,users[i].address,users[i].phone,users[i].account_ID);
+	}
+	printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 }
 
 int getAccountID(char username[]){
@@ -127,13 +149,25 @@ void menuStartSystem(){
 	cout<<"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
 }
 
+void menuAdmin(){
+	cout<<"+++++++++++++++++++++++MENU OF ADMIN+++++++++++++++++++++++++"<<endl;
+	cout<<"+                1. Show list of accounts                   +"<<endl;
+	cout<<"+                2. Show list of users                      +"<<endl;
+	cout<<"+                3. Add new book                            +"<<endl;
+	cout<<"+                4. Update book                             +"<<endl;
+	cout<<"+                5. Sell book                               +"<<endl;
+	cout<<"+                6. Save as file                            +"<<endl;
+	cout<<"+                7. Load file                               +"<<endl;
+	cout<<"+                8. Exit                                    +"<<endl;
+	cout<<"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"<<endl;
+}
+
 int main(){
 	int choice;
 	char userName[31], passWord[31];
 	bool check=true;
 	
 	while(check==true){
-		cout<<endl;
 		menuStartSystem();
 		cout<<"Enter your choice: ";
 		cin>>choice;
@@ -148,6 +182,27 @@ int main(){
 				cin>>passWord;
 				if(loginSystem(userName,passWord)==true){
 					cout<<"Hello, "<<getNameOfUser(userName)<<endl;
+					if(strcmp(userName,"admin")==0){
+						int checked_Admin=0;
+						while(checked_Admin==0){
+							menuAdmin();
+							int choiceAdmin;
+							cout<<">>> Enter your choice: ";
+							cin>>choiceAdmin;
+							switch(choiceAdmin){
+								case 1:
+									showListAccount();
+									break;
+								case 2:
+									showListOfUsers();
+									break;
+								case 8:
+									checked_Admin=-1;
+									break;
+							}
+						}
+						
+					}
 				}
 				else{
 					cout<<"Login failure!"<<endl;
