@@ -13,7 +13,7 @@ Account registerAcc(){
     printf("Nhap so tai khoan: ");
     scanf("%d",&account.accountID);
     fflush(stdin);
-    if(checkExist(account.accountID)==1){
+    if(checkExist(account.accountID)!=-1){
         printf("So tai khoan nay da ton tai. Vui long nhap so tai khoan khac!");
         goto re_enter;
     }
